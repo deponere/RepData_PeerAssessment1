@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Dr. Markus Pleier" />
+
+
+<title>Reproducible Research - Assignment 1</title>
+
+<script src="PA1_template_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="PA1_template_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="PA1_template_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="PA1_template_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="PA1_template_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="PA1_template_files/highlight/default.css"
+      type="text/css" />
+<script src="PA1_template_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="PA1_template_files/navigation-1.0/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Reproducible Research - Assignment 1</h1>
+<h4 class="author"><em>Dr. Markus Pleier</em></h4>
+<h4 class="date"><em>29 Mai 2016</em></h4>
+
+</div>
+
+
+<div id="description-of-the-assignment" class="section level2">
+<h2>Description of the Assignment</h2>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the “quantified self” movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.</p>
+<p>This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.</p>
+<p>The data for this assignment can be downloaded from the course web site:</p>
+<p>Dataset: Activity monitoring data [52K] The variables included in this dataset are:</p>
+<p>steps: Number of steps taking in a 5-minute interval (missing values are coded as 𝙽𝙰) date: The date on which the measurement was taken in YYYY-MM-DD format interval: Identifier for the 5-minute interval in which measurement was taken The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.</p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<div id="repo" class="section level4">
+<h4>Repo</h4>
+<ol style="list-style-type: decimal">
+<li>Valid GitHub URL</li>
+<li>At least one commit beyond the original fork</li>
+<li>Valid SHA-1</li>
+<li>SHA-1 corresponds to a specific commit</li>
+</ol>
+</div>
+<div id="commit-containing-full-submission" class="section level4">
+<h4>Commit containing full submission</h4>
+<ol style="list-style-type: decimal">
+<li>Code for reading in the dataset and/or processing the data</li>
+<li>Histogram of the total number of steps taken each day</li>
+<li>Mean and median number of steps taken each day</li>
+<li>Time series plot of the average number of steps taken</li>
+<li>The 5-minute interval that, on average, contains the maximum number of steps</li>
+<li>Code to describe and show a strategy for imputing missing data</li>
+<li>Histogram of the total number of steps taken each day after missing values are imputed</li>
+<li>Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends</li>
+<li>All of the R code needed to reproduce the results (numbers, plots, etc.) in the report</li>
+</ol>
+</div>
+</div>
+<div id="assignment" class="section level3">
+<h3>Assignment</h3>
+<p>This assignment will be described in multiple parts. You will need to write a report that answers the questions detailed below. Ultimately, you will need to complete the entire assignment in a <strong>single R markdown</strong> document that can be processed by knitr and be transformed into an HTML file.</p>
+<p>Throughout your report make sure you always include the code that you used to generate the output you present. When writing code chunks in the R markdown document, always use 𝚎𝚌𝚑𝚘 = 𝚃𝚁𝚄𝙴 so that someone else will be able to read the code. This assignment will be evaluated via peer assessment so it is essential that your peer evaluators be able to review the code for your analysis.</p>
+<p>For the plotting aspects of this assignment, feel free to use any plotting system in R (i.e., base, lattice, ggplot2)</p>
+<p>Fork/clone the GitHub repository created for this assignment. You will submit this assignment by pushing your completed files into your forked repository on GitHub. The assignment submission will consist of the URL to your GitHub repository and the SHA-1 commit ID for your repository state.</p>
+<p>NOTE: The GitHub repository also contains the dataset for the assignment so you do not have to download the data separately.</p>
+<div id="loading-and-preprocessing-the-data" class="section level4">
+<h4>Loading and preprocessing the data</h4>
+<p>Show any code that is needed to</p>
+<ol style="list-style-type: decimal">
+<li>Load the data (i.e. 𝚛𝚎𝚊𝚍.𝚌𝚜𝚟())</li>
+</ol>
+<pre class="r"><code>setwd(&quot;/Users/MAP/CloudStation/Data Scientist/Reproducible Research/Assignment/Assigment 1&quot;)
+data &lt;- read.csv(&quot;../data/activity.csv&quot;,header=TRUE)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Process/transform the data (if necessary) into a format suitable for your analysis</li>
+</ol>
+<pre class="r"><code>print(str(data))</code></pre>
+<pre><code>## &#39;data.frame&#39;:    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels &quot;2012-10-01&quot;,&quot;2012-10-02&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+## NULL</code></pre>
+</div>
+<div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level4">
+<h4>What is mean total number of steps taken per day?</h4>
+<p>For this part of the assignment, you can ignore the missing values in the dataset.</p>
+<ol style="list-style-type: decimal">
+<li>Calculate the total number of steps taken per day</li>
+</ol>
+<pre class="r"><code>dataSum &lt;- aggregate(data$steps, by=list(date=data$date), FUN=sum)
+names(dataSum) &lt;- c(&quot;date&quot;,&quot;steps&quot;)
+print(head(dataSum))</code></pre>
+<pre><code>##         date steps
+## 1 2012-10-01    NA
+## 2 2012-10-02   126
+## 3 2012-10-03 11352
+## 4 2012-10-04 12116
+## 5 2012-10-05 13294
+## 6 2012-10-06 15420</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day</li>
+</ol>
+<pre class="r"><code>hist(dataSum$steps,main=&quot;Histogram of total number of steps per day&quot;, 
+     xlab=&quot;Total number of steps in a day&quot;)</code></pre>
+<p><img src="PA1_template_files/figure-html/Histogram-1.png" alt="" /><!-- --></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate and report the mean and median of the total number of steps taken per day</li>
+</ol>
+<pre class="r"><code>meanA &lt;- mean(dataSum$steps,na.rm=TRUE)
+medianA &lt;- median(dataSum$steps,na.rm=TRUE)</code></pre>
+<p>The mean of steps taken per day is 1.076618910^{4} and the median is 10765</p>
+</div>
+<div id="what-is-the-average-daily-activity-pattern" class="section level4">
+<h4>What is the average daily activity pattern?</h4>
+<ol style="list-style-type: decimal">
+<li>Make a time series plot (i.e. 𝚝𝚢𝚙𝚎 = “𝚕”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</li>
+</ol>
+<pre class="r"><code>intervalSteps &lt;- aggregate(steps ~ interval, data, mean)
+plot(intervalSteps$interval,intervalSteps$steps,type=&quot;l&quot;,
+     main =&quot;Average number of steps, per day&quot;,
+     ylab=&quot;Average of steps&quot;,xlab=&quot;Interval mapped on days&quot;)</code></pre>
+<p><img src="PA1_template_files/figure-html/Interval-1.png" alt="" /><!-- --></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</li>
+</ol>
+<pre class="r"><code>print(intervalSteps[which.max(intervalSteps$steps),])</code></pre>
+<pre><code>##     interval    steps
+## 104      835 206.1698</code></pre>
+</div>
+<div id="imputing-missing-values" class="section level4">
+<h4>Imputing missing values</h4>
+<p>Note that there are a number of days/intervals where there are missing values (coded as 𝙽𝙰). The presence of missing days may introduce bias into some calculations or summaries of the data.</p>
+<ol style="list-style-type: decimal">
+<li>Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with 𝙽𝙰s)</li>
+</ol>
+<pre class="r"><code>missingRows &lt;- length(data$date)-sum(complete.cases(data))</code></pre>
+<blockquote>
+<p><em>The missig row number is: 2304</em></p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</li>
+</ol>
+<blockquote>
+<p><em>The strategy is that I will put in the mean of intervalls of the days, rounded to have full steps</em></p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a new dataset that is equal to the original dataset but with the missing data filled in.</li>
+</ol>
+<pre class="r"><code>meanInterval &lt;- aggregate(data$steps, by=list(interval=data$interval), FUN=&quot;mean&quot;,na.rm=TRUE)
+data2 &lt;- data
+for (i in 1:length(data2$steps)) {
+        if (is.na(data2$steps[i])) {
+                data2$steps[i] &lt;- round(meanInterval$x[(i %% length(meanInterval$x))+1])
+        } else {
+                data2$steps[i] &lt;- data2$steps[i]
+        }
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?</li>
+</ol>
+<pre class="r"><code>dataSum2 &lt;- aggregate(data2$steps, by=list(date=data2$date), FUN=sum)
+names(dataSum2) &lt;- c(&quot;date&quot;,&quot;steps&quot;)
+hist(dataSum2$steps,main=&quot;Histogram of total number of steps per day/ No NA`s&quot;, 
+     xlab=&quot;Total number of steps in a day&quot;)</code></pre>
+<p><img src="PA1_template_files/figure-html/Calculate2-1.png" alt="" /><!-- --></p>
+<blockquote>
+<p>Does the mean and median differ (yes)?</p>
+</blockquote>
+<pre class="r"><code>meanB &lt;- mean(dataSum2$steps)
+medianB &lt;- median(dataSum2$steps)
+diffMean = meanA - meanB
+diffMedian = medianA - medianB</code></pre>
+<blockquote>
+<p>The new mean mean is 1.076563910^{4} and the new median is 1.076210^{4}. The difference is in mean 0.549335 and in median 3.<br />
+The impact is that the mean and median are going down, see above values for details</p>
+</blockquote>
+</div>
+<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level4">
+<h4>Are there differences in activity patterns between weekdays and weekends?</h4>
+<p>For this part the 𝚠𝚎𝚎𝚔𝚍𝚊𝚢𝚜() function may be of some help here. Use the dataset with the filled-in missing values for this part.</p>
+<ol style="list-style-type: decimal">
+<li>Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</li>
+</ol>
+<pre class="r"><code>weekend = c(&quot;Sonntag&quot;,&quot;Samstag&quot;) # German for Sunday and Saturday
+data2$weekFactor &lt;- ifelse(weekdays(as.Date(data2$date)) %in% weekend,&quot;weekend&quot;,&quot;weekday&quot;)
+data2$weekFactor &lt;- factor(data2$weekFactor)
+str(data2)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    17568 obs. of  4 variables:
+##  $ steps     : num  0 0 0 0 2 1 1 0 1 0 ...
+##  $ date      : Factor w/ 61 levels &quot;2012-10-01&quot;,&quot;2012-10-02&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval  : int  0 5 10 15 20 25 30 35 40 45 ...
+##  $ weekFactor: Factor w/ 2 levels &quot;weekday&quot;,&quot;weekend&quot;: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Make a panel plot containing a time series plot (i.e. 𝚝𝚢𝚙𝚎 = “𝚕”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.</li>
+</ol>
+<pre class="r"><code>library(ggplot2)
+stepsAgg &lt;- aggregate(steps ~ interval + weekFactor, data2, mean)
+qplot(x=interval,y=steps,data=stepsAgg,geom=&quot;line&quot;,
+      main = &quot;weekday/weekend comparison plot&quot;,
+      xlab = &quot;5 minute interval&quot;,
+      ylab = &quot;Steps&quot;) + facet_wrap(~ weekFactor,ncol = 1)</code></pre>
+<p><img src="PA1_template_files/figure-html/FinalPlot-1.png" alt="" /><!-- --></p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
